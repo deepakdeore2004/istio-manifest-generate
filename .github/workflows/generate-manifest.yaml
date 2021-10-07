@@ -23,10 +23,10 @@ jobs:
       with:
         file: input.yaml
         version: foundation.istio.version
-      run: ::set-output name=istio-version::version
+      #run: ::set-output name=istio-version::version
 
     - name: Istio Version
-      run: echo ${{ steps.istio.outputs.istio-version }}
+      run: echo ${{ steps.istio.outputs.version }}
 
         #    - uses: zufardhiyaulhaq/setup-istioctl@v1.0.0
         #      with:
