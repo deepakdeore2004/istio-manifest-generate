@@ -1,13 +1,36 @@
 name: Generate istio manifest
-on: push
+
+on:
+  workflow_dispatch
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - name: Set env
       run: echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
+
     - name: GITHUB_SHA_SHORT
       run: echo $GITHUB_SHA_SHORT
+
     - name: GITHUB_ENV
       run: echo $GITHUB_ENV
+
+    - name: Read istio version
+      id: istio
+      uses: @cumulusds@v0.0.0
+      with:
+        file: input.yaml
+        version: foundation.istio.version
+      run: ::set-output name=istio-version::version
+
+    - name: Istio Version
+      run: echo ${{ steps.istio.outputs.istio-version }
+
+        #    - uses: zufardhiyaulhaq/setup-istioctl@v1.0.0
+        #      with:
+        #        version: foundation.istio.version
+
+
