@@ -6,4 +6,4 @@ foundation:
   cert-manager:
     version: v1.0.1
   istio:
-    version: 1.5.10
+    version: 1.11.2
