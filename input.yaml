@@ -1,0 +1,9 @@
+foundation:
+  opa:
+    version: 3.1.1
+  certissueraddon:
+    version: 0.1.0
+  cert-manager:
+    version: v1.0.1
+  istio:
+    version: 1.9.2
