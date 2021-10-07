@@ -25,6 +25,7 @@ jobs:
         version: ${{ steps.istio-version.outputs.version }}
 
     - name: Check istioctl version
+      if: ${{ steps.istio-version.outputs.version }}
       run: |
         istioctl version --remote=false
 
