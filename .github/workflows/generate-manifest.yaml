@@ -18,18 +18,20 @@ jobs:
     - name: GITHUB_ENV
       run: echo $GITHUB_ENV
 
-    - uses: cumulusds/get-yaml-paths-action@v0.1.0
-      id: istio
+    # ignore warning for this step, refer - https://github.com/CumulusDS/get-yaml-paths-action/issues/7
+    - name: Read istio version
+      uses: cumulusds/get-yaml-paths-action@v0.1.0
+      id: istio-version
       with:
         file: input.yaml
         version: foundation.istio.version
-      #run: ::set-output name=istio-version::version
 
-    - name: Istio Version
-      run: echo ${{ steps.istio.outputs.version }}
+    - name: Install istioctl cli
+      uses: zufardhiyaulhaq/setup-istioctl@v1.0.0
+      with:
+        version: ${{ steps.istio-version.outputs.version }}
 
-        #    - uses: zufardhiyaulhaq/setup-istioctl@v1.0.0
-        #      with:
-        #        version: foundation.istio.version
-
+    - name: Check istioctl
+      run: |
+        istioctl version --remote=false
 
