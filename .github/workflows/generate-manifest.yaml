@@ -22,7 +22,7 @@ jobs:
       with:
         file: input.yaml
         version: foundation.istio.version
-      run: ::set-output name=istio-version::version
+#      run: ::set-output name=istio-version::version
 
     - name: Istio Version
       run: echo ${{ steps.istio.outputs.istio-version }
