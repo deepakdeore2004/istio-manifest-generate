@@ -19,6 +19,7 @@ jobs:
         version: foundation.istio.version
 
     - name: Install istioctl
+      if: ${{ steps.istio-version.outputs.version }}
       uses: zufardhiyaulhaq/setup-istioctl@v1.0.0
       with:
         version: ${{ steps.istio-version.outputs.version }}
