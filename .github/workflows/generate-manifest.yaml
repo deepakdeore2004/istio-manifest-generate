@@ -1,4 +1,4 @@
-name: Generate istio manifest
+name: Install istioctl cli
 
 on:
   workflow_dispatch
@@ -9,16 +9,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set env
-      run: echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
-
-    - name: GITHUB_SHA_SHORT
-      run: echo $GITHUB_SHA_SHORT
-
-    - name: GITHUB_ENV
-      run: echo $GITHUB_ENV
-
-    # ignore warning for this step, refer - https://github.com/CumulusDS/get-yaml-paths-action/issues/7
+    # ignore warning for this step 
+    # refer - https://github.com/CumulusDS/get-yaml-paths-action/issues/7
     - name: Read istio version
       uses: cumulusds/get-yaml-paths-action@v0.1.0
       id: istio-version
@@ -26,12 +18,12 @@ jobs:
         file: input.yaml
         version: foundation.istio.version
 
-    - name: Install istioctl cli
+    - name: Install istioctl
       uses: zufardhiyaulhaq/setup-istioctl@v1.0.0
       with:
         version: ${{ steps.istio-version.outputs.version }}
 
-    - name: Check istioctl
+    - name: Check istioctl version
       run: |
         istioctl version --remote=false
 
