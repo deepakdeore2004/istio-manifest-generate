@@ -13,7 +13,7 @@ jobs:
     # refer - https://github.com/CumulusDS/get-yaml-paths-action/issues/7
     - name: Read istio version
       uses: cumulusds/get-yaml-paths-action@v0.1.0
-      id: istio-version
+      id: istio-version # will be referred in next step
       with:
         file: input.yaml
         version: foundation.istio.version
